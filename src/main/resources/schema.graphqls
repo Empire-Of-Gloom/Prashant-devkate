@@ -1,0 +1,64 @@
+scalar String
+
+type Organization {
+    id: ID!
+    orgId: String
+    tenantId: String
+    mappingPrecedence: String
+    nameFormat: String
+    subscriberMatchRule: String
+    realtimeLateflowDelay: String
+    retentionPeriodDays: Int
+    templateTimeoutHours: Int
+    aggregationRules: String
+    entitlement: String
+    orgAdditionalInfo: String
+    enableSubscriberAssoc: Boolean
+    useAsmApplications: Boolean
+    allowOntReplacement: Boolean
+    deleted: Boolean
+    createTime: String
+    updateTime: String
+    deleteTime: String
+    clearFilterCache: String
+    aggGroupMappedBy: String
+    enableRgOntSubscriberAssoc: Boolean
+}
+
+type Location {
+    id: String!
+    deleteTime: String
+    deleted: Boolean
+    subnetsV4: String
+    subnetsV6: String
+    name: String
+    region: String
+    address: String
+    geo: String
+    orgId: String
+    tenantId: String
+    updateTime: String
+    createTime: String
+}
+
+type Query {
+  getAllOrganizations: [Organization]
+  getOrganizationById(id: ID!): Organization
+
+  getAllLocations: [Location]
+  getLocationById(id: String!): Location
+  getLocationByOrgId(orgId: String): [Location]
+}
+
+type Mutation {
+  addOrganization(orgId: String, tenantId: String, mappingPrecedence: String, nameFormat: String, 
+                  subscriberMatchRule: String, realtimeLateflowDelay: String, retentionPeriodDays: Int, 
+                  templateTimeoutHours: Int, aggregationRules: String, entitlement: String, 
+                  orgAdditionalInfo: String, enableSubscriberAssoc: Boolean, useAsmApplications: Boolean, 
+                  allowOntReplacement: Boolean, deleted: Boolean, clearFilterCache: String, 
+                  aggGroupMappedBy: String, enableRgOntSubscriberAssoc: Boolean): Organization
+  deleteOrganization(id: ID!): String
+
+  addLocation(subnetsV4: String, subnetsV6: String, name: String, region: String, address: String, geo: String, orgId: String, tenantId: String): Location
+  deleteLocation(id: String!): String
+}

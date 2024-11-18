@@ -1,0 +1,48 @@
+mutation {
+  createOrganization(
+    orgId: "org123",
+    tenantId: "tenant123",
+    mappingPrecedence: "high",
+    nameFormat: "full",
+    subscriberMatchRule: "matchRule",
+    realtimeLateflowDelay: "5m",
+    retentionPeriodDays: 30,
+    templateTimeoutHours: 24,
+    aggregationRules: "rules",
+    entitlement: "entitlement",
+    orgAdditionalInfo: "additional info",
+    enableSubscriberAssoc: true,
+    useAsmApplications: false,
+    allowOntReplacement: true,
+    deleted: false,
+    createTime: "2023-10-01T00:00:00Z",
+    updateTime: "2023-10-01T00:00:00Z",
+    deleteTime: "2023-10-01T00:00:00Z",
+    clearFilterCache: "cache",
+    aggGroupMappedBy: "group",
+    enableRgOntSubscriberAssoc: true
+  ) {
+    id
+    orgId
+    tenantId
+    mappingPrecedence
+    nameFormat
+    subscriberMatchRule
+    realtimeLateflowDelay
+    retentionPeriodDays
+    templateTimeoutHours
+    aggregationRules
+    entitlement
+    orgAdditionalInfo
+    enableSubscriberAssoc
+    useAsmApplications
+    allowOntReplacement
+    deleted
+    createTime
+    updateTime
+    deleteTime
+    clearFilterCache
+    aggGroupMappedBy
+    enableRgOntSubscriberAssoc
+  }
+}
