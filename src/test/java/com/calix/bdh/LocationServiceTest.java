@@ -35,7 +35,7 @@ public class LocationServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this); }
     @Test
-    public void testSaveOrganization() {
+    public void testSaveLocation() {
         // Arrange
         Location location = new Location();
         location.setId(UUID.randomUUID());
@@ -130,5 +130,50 @@ public class LocationServiceTest {
         // Assert
         assertNull(result);
     }
+    @Test
+    public void testFindByOrgId() {
+        // Arrange
+        String orgId = "testOrg123";
+        Location location1 = new Location();
+        location1.setId(UUID.randomUUID());
+        location1.setName("Location 1");
+        location1.setTenantId(orgId);
+
+        Location location2 = new Location();
+        location2.setId(UUID.randomUUID());
+        location2.setName("Location 2");
+        location2.setTenantId(orgId);
+
+        List<Location> locations = Arrays.asList(location1, location2);
+        when(locationRepository.findByOrgId(orgId)).thenReturn(locations);
+
+        // Act
+        List<Location> result = locationService.findByOrgId(orgId);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals("Location 1", result.get(0).getName());
+        assertEquals(orgId, result.get(0).getTenantId());
+        assertEquals("Location 2", result.get(1).getName());
+        assertEquals(orgId, result.get(1).getTenantId());
+        verify(locationRepository, times(1)).findByOrgId(orgId);
+    }
+
+    @Test
+    public void testFindByOrgId_NoResults() {
+        // Arrange
+        String orgId = "nonExistentOrg";
+        when(locationRepository.findByOrgId(orgId)).thenReturn(Arrays.asList());
+
+        // Act
+        List<Location> result = locationService.findByOrgId(orgId);
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+        verify(locationRepository, times(1)).findByOrgId(orgId);
+    }
+
 
 }
